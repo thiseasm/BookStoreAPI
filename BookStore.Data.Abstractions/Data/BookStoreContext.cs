@@ -6,6 +6,11 @@ namespace BookStore.Data.Abstractions.Context
 {
     public class BookStoreContext(DbContextOptions<BookStoreContext> options) : DbContext(options)
     {
+        DbSet<UserDto> Users { get; set; }
+        DbSet<RoleDto> Roles { get; set; }
+        DbSet<BookDto> Books { get; set; }
+        DbSet<CategoryDto> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserDto>()
