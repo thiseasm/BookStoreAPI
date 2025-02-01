@@ -1,8 +1,9 @@
 
 using BookStore.Data.Abstractions.Context;
+using BookStore.Web.Api.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Web.Api
+namespace BookStoreAPI
 {
     public class Program
     {
@@ -13,6 +14,7 @@ namespace BookStore.Web.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddRegistrations();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
