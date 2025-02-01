@@ -9,6 +9,6 @@ namespace BookStore.Infrastructure.DTOs
         [StringLength(100)]
         public required string Name { get; set; }
         public required int CategoryId { get; set; }
-        public required CategoryDto Category { get; set; }
+        public CategoryDto Category { get; set; }
     }
 }

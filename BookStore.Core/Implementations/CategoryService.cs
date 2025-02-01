@@ -22,6 +22,7 @@ namespace BookStore.Core.Implementations
 
             var booksThatUseCategory = await dbContext.Books
                 .Where(book => book.CategoryId == categoryId)
+                .AsNoTracking()
                 .CountAsync(cancellationToken);
 
             if (booksThatUseCategory > 0)

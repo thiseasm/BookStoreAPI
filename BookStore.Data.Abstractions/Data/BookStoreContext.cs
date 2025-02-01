@@ -19,7 +19,14 @@ namespace BookStore.Infrastructure.Data
                 .UsingEntity<UserRoleDto>();
 
             modelBuilder.Entity<RoleDto>()
-                .ToTable("Role");
+                .ToTable("Role")
+                .HasData(
+                    new RoleDto { Id = 1, Name = "Admin" },
+                    new RoleDto { Id = 2, Name = "IT" },
+                    new RoleDto { Id = 3, Name = "Moderator" },
+                    new RoleDto { Id = 4, Name = "Test" },
+                    new RoleDto { Id = 5, Name = "User" }
+                );
 
             modelBuilder.Entity<BookDto>()
                 .ToTable("Book")
@@ -29,7 +36,17 @@ namespace BookStore.Infrastructure.Data
                 .IsRequired();
 
             modelBuilder.Entity<CategoryDto>()
-                .ToTable("Category");
+                .ToTable("Category")
+                .HasData(
+                    new CategoryDto { Id = 1, Name = "Fiction" },
+                    new CategoryDto { Id = 2, Name = "Science" },
+                    new CategoryDto { Id = 3, Name = "Horror" },
+                    new CategoryDto { Id = 4, Name = "Mystery" },
+                    new CategoryDto { Id = 5, Name = "Romance" },
+                    new CategoryDto { Id = 6, Name = "Biography" },
+                    new CategoryDto { Id = 7, Name = "Poetry" },
+                    new CategoryDto { Id = 8, Name = "Fantasy" }
+                );                
 
             modelBuilder.Entity<UserRoleDto>()
                 .ToTable("UserRoles");
