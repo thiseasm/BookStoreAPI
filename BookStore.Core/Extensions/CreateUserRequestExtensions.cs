@@ -1,5 +1,5 @@
 ﻿using BookStore.Core.Abstractions.Models.Users;
-using BookStore.Infrastructure.Abstractions.DTOs;
+using BookStore.Infrastructure.DTOs;
 
 namespace BookStore.Core.Extensions
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Infrastructure.Abstractions.DTOs
+namespace BookStore.Infrastructure.DTOs
 {
     public class CategoryDto
     {

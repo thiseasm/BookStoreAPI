@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Web.Api", "BookStoreAPI\BookStore.Web.Api.csproj", "{96E37F70-E5BE-4DAA-8859-4ED6BE37D833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure.Abstractions", "BookStore.Data.Abstractions\BookStore.Infrastructure.Abstractions.csproj", "{8189FCF2-FC23-4B43-A5E3-85B067419C8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure", "BookStore.Data.Abstractions\BookStore.Infrastructure.csproj", "{8189FCF2-FC23-4B43-A5E3-85B067419C8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Core", "BookStore.Core\BookStore.Core.csproj", "{A4F04CFA-A007-4737-8BFE-461A7796947F}"
 EndProject

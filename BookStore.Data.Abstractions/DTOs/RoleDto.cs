@@ -1,7 +1,6 @@
-﻿using BookStore.Infrastructure.Abstractions.DTOs;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Data.Abstractions.Models
+namespace BookStore.Infrastructure.DTOs
 {
     public class RoleDto
     {

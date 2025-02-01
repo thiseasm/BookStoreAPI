@@ -17,7 +17,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\BookStore.Core.Abstractions\BookStore.Core.Abstractions.csproj" />
 		<ProjectReference Include="..\BookStore.Core\BookStore.Core.csproj" />
-		<ProjectReference Include="..\BookStore.Data.Abstractions\BookStore.Infrastructure.Abstractions.csproj" />
+		<ProjectReference Include="..\BookStore.Data.Abstractions\BookStore.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

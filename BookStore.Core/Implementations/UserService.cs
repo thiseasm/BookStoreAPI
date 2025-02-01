@@ -1,7 +1,7 @@
 ﻿using BookStore.Core.Abstractions.Interfaces;
 using BookStore.Core.Abstractions.Models.Users;
 using BookStore.Core.Extensions;
-using BookStore.Data.Abstractions.Context;
+using BookStore.Infrastructure.Data;
 
 namespace BookStore.Core.Implementations
 {

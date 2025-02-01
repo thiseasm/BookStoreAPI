@@ -1,6 +1,6 @@
 ﻿using BookStore.Core.Abstractions.Interfaces;
 using BookStore.Core.Abstractions.Models;
-using BookStore.Data.Abstractions.Context;
+using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Core.Implementations

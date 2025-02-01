@@ -1,7 +1,6 @@
-﻿using BookStore.Data.Abstractions.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Infrastructure.Abstractions.DTOs
+namespace BookStore.Infrastructure.DTOs
 {
     public class UserDto
     {

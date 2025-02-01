@@ -1,8 +1,7 @@
-﻿using BookStore.Data.Abstractions.Models;
-using BookStore.Infrastructure.Abstractions.DTOs;
+﻿using BookStore.Infrastructure.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Data.Abstractions.Context
+namespace BookStore.Infrastructure.Data
 {
     public class BookStoreContext(DbContextOptions<BookStoreContext> options) : DbContext(options)
     {
