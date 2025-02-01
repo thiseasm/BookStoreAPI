@@ -8,5 +8,7 @@ namespace BookStore.Infrastructure.Abstractions.DTOs
 
         [StringLength(100)]
         public required string Name { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

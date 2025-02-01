@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BookStore.Infrastructure.Abstractions.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Data.Abstractions.Models
 {
