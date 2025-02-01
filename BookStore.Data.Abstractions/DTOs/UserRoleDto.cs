@@ -1,4 +1,4 @@
-﻿namespace BookStore.Data.Abstractions.DTOs
+﻿namespace BookStore.Infrastructure.Abstractions.DTOs
 {
     public class UserRoleDto
     {

@@ -7,10 +7,10 @@ namespace BookStore.Data.Abstractions.Models
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [StringLength(100)]
-        public string Surname { get; set; }
+        public required string Surname { get; set; }
 
         public List<RoleDto> Roles { get; } = [];
     }

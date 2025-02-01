@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Data.Abstractions.Models
+namespace BookStore.Infrastructure.Abstractions.DTOs
 {
     public class BookDto
     {
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Name { get; set; }
-        public int CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
+        public required string Name { get; set; }
+        public required int CategoryId { get; set; }
+        public required CategoryDto Category { get; set; }
     }
 }

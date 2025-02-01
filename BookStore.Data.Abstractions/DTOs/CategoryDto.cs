@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Data.Abstractions.Models
+namespace BookStore.Infrastructure.Abstractions.DTOs
 {
     public class CategoryDto
     {
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 }

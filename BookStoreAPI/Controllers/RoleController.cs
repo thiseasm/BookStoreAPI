@@ -1,6 +1,5 @@
 using BookStore.Core.Abstractions.Interfaces;
-using BookStore.Core.Abstractions.Models.Roles;
-using BookStore.Core.Abstractions.Models.Users;
+using BookStore.Core.Abstractions.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Web.Api.Controllers
@@ -10,7 +9,7 @@ namespace BookStore.Web.Api.Controllers
     public class RolesController(IRoleService roleService) : ControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(typeof(IList<RoleResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IList<Role>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRolesAsync(CancellationToken cancellationToken)
         {

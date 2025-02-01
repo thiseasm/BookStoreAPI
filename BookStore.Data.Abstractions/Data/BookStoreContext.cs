@@ -1,5 +1,5 @@
-﻿using BookStore.Data.Abstractions.DTOs;
-using BookStore.Data.Abstractions.Models;
+﻿using BookStore.Data.Abstractions.Models;
+using BookStore.Infrastructure.Abstractions.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Data.Abstractions.Context
