@@ -9,7 +9,7 @@ namespace BookStore.Core.Implementations
 {
     public class BookService(BookStoreContext dbContext) : IBookService
     {
-        public async Task<ApiResponse<IList<Book>>> GetBooksAsync(CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<IList<Book>>> GetBooksAsync(CancellationToken cancellationToken)
         {
             var result = await dbContext.Books
                 .Include(book => book.Category)

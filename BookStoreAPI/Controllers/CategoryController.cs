@@ -12,7 +12,7 @@ namespace BookStore.Web.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<IList<Category>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetCategoriessAsync(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetCategoriesAsync(CancellationToken cancellationToken)
         {
             var result = await categoryService.GetCategoriesAsync(cancellationToken);
             return Ok(result.Data);

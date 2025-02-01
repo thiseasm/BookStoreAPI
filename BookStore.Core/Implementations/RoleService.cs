@@ -8,7 +8,7 @@ namespace BookStore.Core.Implementations
 {
     public class RoleService(BookStoreContext dbContext) : IRoleService
     {
-        public async Task<ApiResponse<IList<Role>>> GetRolesAsync(CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<IList<Role>>> GetRolesAsync(CancellationToken cancellationToken)
         {
             var result = await dbContext.Roles
                 .OrderBy(role => role.Id)

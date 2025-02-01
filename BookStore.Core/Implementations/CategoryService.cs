@@ -9,7 +9,7 @@ namespace BookStore.Core.Implementations
 {
     public class CategoryService(BookStoreContext dbContext) : ICategoryService
     {
-        public async Task<ApiResponse<string>> DeleteCategoryAsync(int categoryId, CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<string>> DeleteCategoryAsync(int categoryId, CancellationToken cancellationToken)
         {
             var category = await dbContext.Categories
                 .Where(category => category.Id == categoryId && category.IsActive)
@@ -37,7 +37,7 @@ namespace BookStore.Core.Implementations
 
         }
 
-        public async Task<ApiResponse<IList<Category>>> GetCategoriesAsync(CancellationToken cancellationToken = default)
+        public async Task<ApiResponse<IList<Category>>> GetCategoriesAsync(CancellationToken cancellationToken)
         {
             var result = await dbContext.Categories
                 .Where(category => category.IsActive)

@@ -12,6 +12,6 @@ namespace BookStore.Infrastructure.DTOs
         [StringLength(100)]
         public required string Surname { get; set; }
 
-        public List<RoleDto> Roles { get; } = [];
+        public List<RoleDto> Roles { get; set; } = [];
     }
 }
