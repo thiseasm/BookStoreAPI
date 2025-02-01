@@ -15,6 +15,7 @@ namespace BookStore.Core.Abstractions.Models.ApiResponses
         public static ApiResponse<T> Created(T data) => new() { Success = true, Data = data, StatusCode = HttpStatusCode.Created };
         public static ApiResponse<T> NotFound(string error) => new() { Success = false, Error = error, StatusCode = HttpStatusCode.NotFound };
         public static ApiResponse<T> Conflict(string error) => new() { Success = false, Error = error, StatusCode = HttpStatusCode.Conflict };
+        public static ApiResponse<T> InternalError(string error) => new() { Success = false, Error = error, StatusCode = HttpStatusCode.InternalServerError };
     }
 
 }

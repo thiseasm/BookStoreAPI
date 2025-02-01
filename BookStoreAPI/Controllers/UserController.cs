@@ -1,5 +1,8 @@
 using BookStore.Core.Abstractions.Interfaces;
+using BookStore.Core.Abstractions.Models;
+using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
+using BookStore.Core.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Web.Api.Controllers
@@ -9,13 +12,15 @@ namespace BookStore.Web.Api.Controllers
     public class UserController(IUserService userService) : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(CreateUserResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ApiResponse<CreateUserResponse>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
         {
             var result = await userService.CreateUserAsync(request, cancellationToken);
-            return new JsonResult(result) { StatusCode = StatusCodes.Status201Created };
+            return result.Success 
+                ? Ok(result.Data)
+                : StatusCode(result.Code, result.Error);
         }
     }
 }

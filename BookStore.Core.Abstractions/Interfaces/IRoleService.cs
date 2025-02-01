@@ -1,9 +1,10 @@
 ﻿using BookStore.Core.Abstractions.Models;
+using BookStore.Core.Abstractions.Models.ApiResponses;
 
 namespace BookStore.Core.Abstractions.Interfaces
 {
     public interface IRoleService
     {
-        Task<IList<Role>> GetRolesAsync(CancellationToken cancellationToken = default);
+        Task<ApiResponse<IList<Role>>> GetRolesAsync(CancellationToken cancellationToken = default);
     }
 }

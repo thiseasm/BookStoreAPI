@@ -1,9 +1,10 @@
-﻿using BookStore.Core.Abstractions.Models.Users;
+﻿using BookStore.Core.Abstractions.Models.ApiResponses;
+using BookStore.Core.Abstractions.Models.Users;
 
 namespace BookStore.Core.Abstractions.Interfaces
 {
     public interface IUserService
     {
-        Task<CreateUserResponse> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken = default);
+        Task<ApiResponse<CreateUserResponse>> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken = default);
     }
 }
