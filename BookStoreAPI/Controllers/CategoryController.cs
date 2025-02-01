@@ -16,5 +16,18 @@ namespace BookStore.Web.Api.Controllers
             var result = await categoryService.GetCategoriesAsync(cancellationToken);
             return Ok(result);
         }
+
+        [HttpDelete("{id:int:min(1)}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteCategoryAsync(int id, CancellationToken cancellationToken)
+        {
+            var result = await categoryService.DeleteCategoryAsync(id, cancellationToken);
+            return result.Success 
+                ? Ok(result.Data) 
+                : StatusCode(result.Code, result.Error);
+        }
     }
 }
