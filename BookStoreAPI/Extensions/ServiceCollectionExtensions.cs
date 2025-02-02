@@ -1,4 +1,4 @@
-﻿using BookStore.Core.Abstractions.Interfaces;
+﻿using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Services;
 
 namespace BookStore.Web.Api.Extensions

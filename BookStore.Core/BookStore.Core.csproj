@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BookStore.Data.Abstractions\BookStore.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+
 </Project>

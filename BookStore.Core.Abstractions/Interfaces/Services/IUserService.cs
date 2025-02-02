@@ -1,7 +1,7 @@
 ﻿using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
 
-namespace BookStore.Core.Abstractions.Interfaces
+namespace BookStore.Core.Abstractions.Interfaces.Services
 {
     public interface IUserService
     {

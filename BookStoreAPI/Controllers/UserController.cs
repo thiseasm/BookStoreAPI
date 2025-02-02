@@ -1,4 +1,4 @@
-using BookStore.Core.Abstractions.Interfaces;
+using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
 using Microsoft.AspNetCore.Mvc;
