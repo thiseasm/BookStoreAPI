@@ -99,8 +99,12 @@ namespace BookStore.Core.Services
 
                 if (request.RoleIds.Count == 0)
                 {
+                    var rolesToClear = userDto.Roles.Select(r => r.Id).ToHashSet();
                     userDto.Roles.Clear();
                     await dbContext.SaveChangesAsync(cancellationToken);
+
+                    var rolesUpdatedEvent = new UserRolesUpdatedEvent(userId, rolesToClear, [], DateTime.UtcNow);
+                    await mediator.Send(rolesUpdatedEvent, cancellationToken);
                     return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been cleared");
                 }
 
