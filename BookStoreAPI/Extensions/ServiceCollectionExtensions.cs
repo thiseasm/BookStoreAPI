@@ -1,8 +1,10 @@
-﻿using BookStore.Core.Abstractions.Events;
+﻿using BookStore.Core.Abstractions.Configurations;
+using BookStore.Core.Abstractions.Events;
 using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Handlers;
 using BookStore.Core.Services;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStore.Web.Api.Extensions
 {
@@ -21,6 +23,9 @@ namespace BookStore.Web.Api.Extensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
             services.AddScoped<IRequestHandler<UserCreatedEvent>, UserCreatedHandler>();
             services.AddScoped<IRequestHandler<UserRolesUpdatedEvent>, UserRoleUpdatedHandler>();
+
+            //Hosted Services
+            services.AddHostedService<LogCleanupService>();
         }
     }
 }

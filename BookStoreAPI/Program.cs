@@ -1,6 +1,8 @@
+using BookStore.Core.Abstractions.Configurations;
 using BookStore.Infrastructure.Data;
 using BookStore.Web.Api.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStoreAPI
 {
@@ -18,9 +20,12 @@ namespace BookStoreAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add DbContext
             var connectionString = builder.Configuration.GetConnectionString("BookStoreDB") ?? throw new InvalidOperationException("Connection string 'BookStoreDB' not found.");
-
             builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(connectionString));
+
+            //Add Configurations
+            builder.Services.Configure<LogCleanupConfig>(builder.Configuration.GetSection("LogCleanupConfig"));
 
             var app = builder.Build();
 
