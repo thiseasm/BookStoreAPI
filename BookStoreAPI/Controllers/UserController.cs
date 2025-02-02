@@ -23,7 +23,7 @@ namespace BookStore.Web.Api.Controllers
         [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetUsersAsync(int id,CancellationToken cancellationToken)
+        public async Task<IActionResult> GetUserByIdAsync(int id,CancellationToken cancellationToken)
         {
             var result = await userService.GetUserByIdAsync(id, cancellationToken);
             return result.Success
@@ -32,7 +32,7 @@ namespace BookStore.Web.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<CreateUserResponse>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ApiResponse<int>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request, CancellationToken cancellationToken)

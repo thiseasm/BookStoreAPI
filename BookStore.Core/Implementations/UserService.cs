@@ -4,6 +4,7 @@ using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
 using BookStore.Core.Extensions;
 using BookStore.Infrastructure.Data;
+using BookStore.Infrastructure.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace BookStore.Core.Implementations
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Unexpected error while retrieving User ID: {UserId}", userId);
+                logger.LogError(ex, "Unexpected error while retrieving User with ID: {UserId}", userId);
                 return ApiResponse<User>.InternalError("An unexpected error occurred.");
             }
         }
@@ -52,32 +53,32 @@ namespace BookStore.Core.Implementations
             }
         }
 
-        public async Task<ApiResponse<CreateUserResponse>> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<int>> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var userDto = request.ToDto();
+                var userDto = new UserDto
+                {
+                    Name = request.Name,
+                    Surname = request.Surname
+                };
 
                 await dbContext.Users.AddAsync(userDto, cancellationToken);
                 await dbContext.SaveChangesAsync(cancellationToken);
 
                 if (userDto.Id == 0)
                 {
-                    return ApiResponse<CreateUserResponse>.InternalError("Failed to create user");
+                    return ApiResponse<int>.InternalError("Failed to create user");
                 }
 
 
-                return ApiResponse<CreateUserResponse>.Created(new CreateUserResponse
-                {
-                    Id = userDto.Id
-                });
+                return ApiResponse<int>.Created(userDto.Id);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Unexpected error while creating User with Data: {UserRequest}", JsonConvert.SerializeObject(request));
-                return ApiResponse<CreateUserResponse>.InternalError("An unexpected error occurred.");
+                return ApiResponse<int>.InternalError("An unexpected error occurred.");
             }
-
         }
 
         public async Task<ApiResponse<string>> UpdateUserRolesAsync(int userId, UpdateUserRolesRequest request, CancellationToken cancellationToken)
