@@ -3,5 +3,5 @@ using MediatR;
 
 namespace BookStore.Core.Abstractions.Events
 {
-    public record UserCreatedEvent(User CreatedUser, DateTime Timestamp) : INotification;
+    public record UserCreatedEvent(User CreatedUser, DateTime Timestamp) : IRequest;
 }

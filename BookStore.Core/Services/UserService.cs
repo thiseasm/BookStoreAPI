@@ -73,7 +73,7 @@ namespace BookStore.Core.Services
                 }
 
                 var userCreatedEvent = new UserCreatedEvent(userDto.ToDomain(), DateTime.UtcNow);
-                await mediator.Publish(userCreatedEvent, cancellationToken);
+                await mediator.Send(userCreatedEvent, cancellationToken);
 
                 return ApiResponse<int>.Created(userDto.Id);
             }
@@ -134,7 +134,7 @@ namespace BookStore.Core.Services
                 var removedIds = rolesToRemove.Select(r => r.Id).ToList();
                 var addedIds = rolesToAdd.Select(r => r.Id).ToList();
                 var userRolesUpdatedEvent = new UserRoleUpdatedEvent(userId, removedIds,addedIds, DateTime.UtcNow);
-                await mediator.Publish(userRolesUpdatedEvent, cancellationToken);
+                await mediator.Send(userRolesUpdatedEvent, cancellationToken);
 
                 return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been updated");
             }

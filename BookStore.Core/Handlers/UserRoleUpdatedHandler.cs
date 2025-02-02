@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BookStore.Core.Handlers
 {
-    internal class UserRoleUpdatedHandler(IUserLogService logService) : INotificationHandler<UserRoleUpdatedEvent>
+    public class UserRoleUpdatedHandler(IUserLogService logService) : IRequestHandler<UserRoleUpdatedEvent>
     {
         public async Task Handle(UserRoleUpdatedEvent notification, CancellationToken cancellationToken = default)
         {

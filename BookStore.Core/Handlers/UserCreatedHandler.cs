@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace BookStore.Core.Handlers
 {
-    public class UserCreatedHandler(IUserLogService logService) : INotificationHandler<UserCreatedEvent>
+    public class UserCreatedHandler(IUserLogService logService) : IRequestHandler<UserCreatedEvent>
     {
         public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
         {
