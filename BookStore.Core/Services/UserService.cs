@@ -99,13 +99,7 @@ namespace BookStore.Core.Services
 
                 if (request.RoleIds.Count == 0)
                 {
-                    var rolesToClear = userDto.Roles.Select(r => r.Id).ToHashSet();
-                    userDto.Roles.Clear();
-                    await dbContext.SaveChangesAsync(cancellationToken);
-
-                    var rolesUpdatedEvent = new UserRolesUpdatedEvent(userId, rolesToClear, [], DateTime.UtcNow);
-                    await mediator.Send(rolesUpdatedEvent, cancellationToken);
-                    return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been cleared");
+                    return await ClearUserRoles(userDto, cancellationToken);
                 }
 
                 var roleDtos = await dbContext.Roles
@@ -150,7 +144,17 @@ namespace BookStore.Core.Services
                 logger.LogError(ex, "Unexpected error while updating User Roles for User ID: {UserId}", userId);
                 return ApiResponse<string>.InternalError("An unexpected error occurred.");
             }
+        }
 
+        private async Task<ApiResponse<string>> ClearUserRoles(UserDto userDto, CancellationToken cancellationToken)
+        {
+            var rolesToClear = userDto.Roles.Select(r => r.Id).ToHashSet();
+            userDto.Roles.Clear();
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            var rolesUpdatedEvent = new UserRolesUpdatedEvent(userDto.Id, rolesToClear, [], DateTime.UtcNow);
+            await mediator.Send(rolesUpdatedEvent, cancellationToken);
+            return ApiResponse<string>.Ok($"Roles for User with ID: {userDto.Id} have been cleared");
         }
     }
 }
