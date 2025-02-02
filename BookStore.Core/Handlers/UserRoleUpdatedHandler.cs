@@ -12,7 +12,7 @@ namespace BookStore.Core.Handlers
             var log = new UserLog
             {
                 Timestamp = notification.Timestamp,
-                Action = "UserCreated",
+                Action = "UserRolesUpdated",
                 EntityId = notification.UserId,
                 PreviousState = string.Join(",", notification.RolesRemoved),
                 NextState = string.Join(",", notification.RolesAdded),
