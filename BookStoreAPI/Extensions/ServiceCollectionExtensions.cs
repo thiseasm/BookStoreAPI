@@ -1,5 +1,6 @@
 ﻿using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Services;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BookStore.Web.Api.Extensions
 {
@@ -12,7 +13,9 @@ namespace BookStore.Web.Api.Extensions
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUserLogService, UserLogService>();
 
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
         }
     }
 }
