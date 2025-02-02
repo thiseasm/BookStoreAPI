@@ -118,6 +118,11 @@ namespace BookStore.Core.Services
                 var existingRoleIds = userDto.Roles.Select(r => r.Id).ToHashSet();
                 var newRoleIds = request.RoleIds.ToHashSet();
 
+                if (existingRoleIds.SetEquals(newRoleIds))
+                {
+                    return ApiResponse<string>.Ok($"Roles for User with ID: {userId} are already up to date");
+                }
+
                 var rolesToAdd = roleDtos.Where(r => !existingRoleIds.Contains(r.Id));
                 foreach (var role in rolesToAdd)
                 {
@@ -131,9 +136,7 @@ namespace BookStore.Core.Services
                 }
                 await dbContext.SaveChangesAsync(cancellationToken);
 
-                var removedIds = rolesToRemove.Select(r => r.Id).ToList();
-                var addedIds = rolesToAdd.Select(r => r.Id).ToList();
-                var userRolesUpdatedEvent = new UserRoleUpdatedEvent(userId, removedIds,addedIds, DateTime.UtcNow);
+                var userRolesUpdatedEvent = new UserRolesUpdatedEvent(userId, existingRoleIds, newRoleIds, DateTime.UtcNow);
                 await mediator.Send(userRolesUpdatedEvent, cancellationToken);
 
                 return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been updated");

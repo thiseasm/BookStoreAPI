@@ -5,14 +5,14 @@ using MediatR;
 
 namespace BookStore.Core.Handlers
 {
-    public class UserRoleUpdatedHandler(IUserLogService logService) : IRequestHandler<UserRoleUpdatedEvent>
+    public class UserRoleUpdatedHandler(IUserLogService logService) : IRequestHandler<UserRolesUpdatedEvent>
     {
-        public async Task Handle(UserRoleUpdatedEvent notification, CancellationToken cancellationToken = default)
+        public async Task Handle(UserRolesUpdatedEvent notification, CancellationToken cancellationToken = default)
         {
             var log = new UserLog
             {
                 Timestamp = notification.Timestamp,
-                Action = "UserRolesUpdated",
+                Action = "Roles Updated",
                 EntityId = notification.UserId,
                 PreviousState = string.Join(",", notification.RolesRemoved),
                 NextState = string.Join(",", notification.RolesAdded),

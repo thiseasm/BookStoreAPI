@@ -2,7 +2,6 @@
 using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Abstractions.Models.AuditLogs;
 using MediatR;
-using System.Text.Json;
 
 namespace BookStore.Core.Handlers
 {
@@ -13,10 +12,10 @@ namespace BookStore.Core.Handlers
             var log = new UserLog
             {
                 Timestamp = notification.Timestamp,
-                Action = "UserCreated",
+                Action = "Created",
                 EntityId = notification.CreatedUser.Id,
                 PreviousState = string.Empty,
-                NextState = JsonSerializer.Serialize(notification.CreatedUser)
+                NextState = notification.CreatedUser.ToString()
             };
 
             await logService.SaveUserLog(log, cancellationToken);

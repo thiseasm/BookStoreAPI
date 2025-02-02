@@ -20,7 +20,7 @@ namespace BookStore.Web.Api.Extensions
             //Mediator
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
             services.AddScoped<IRequestHandler<UserCreatedEvent>, UserCreatedHandler>();
-            services.AddScoped<IRequestHandler<UserRoleUpdatedEvent>, UserRoleUpdatedHandler>();
+            services.AddScoped<IRequestHandler<UserRolesUpdatedEvent>, UserRoleUpdatedHandler>();
         }
     }
 }

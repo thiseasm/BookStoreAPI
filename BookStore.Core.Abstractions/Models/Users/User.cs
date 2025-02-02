@@ -8,5 +8,8 @@ namespace BookStore.Core.Abstractions.Models.Users
         public required string Name { get; set; }
         public required string Surname { get; set; }
         public List<Role> Roles { get; set; } = [];
+
+        public override string ToString() => $"ID:{Id}, Name: {Name}, Surname: {Surname}";
+        
     }
 }
