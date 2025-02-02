@@ -1,16 +1,18 @@
-﻿using BookStore.Core.Abstractions.Interfaces.Services;
+﻿using BookStore.Core.Abstractions.Events;
+using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
 using BookStore.Core.Extensions;
 using BookStore.Infrastructure.Data;
 using BookStore.Infrastructure.DTOs;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace BookStore.Core.Services
 {
-    public class UserService(ILogger<UserService> logger,BookStoreContext dbContext) : IUserService
+    public class UserService(ILogger<UserService> logger, IMediator mediator,BookStoreContext dbContext) : IUserService
     {
         public async Task<ApiResponse<User>> GetUserByIdAsync(int userId, CancellationToken cancellationToken)
         {
@@ -70,6 +72,8 @@ namespace BookStore.Core.Services
                     return ApiResponse<int>.InternalError("Failed to create user");
                 }
 
+                var userCreatedEvent = new UserCreatedEvent(userDto.ToDomain(), DateTime.UtcNow);
+                await mediator.Publish(userCreatedEvent, cancellationToken);
 
                 return ApiResponse<int>.Created(userDto.Id);
             }
@@ -126,6 +130,11 @@ namespace BookStore.Core.Services
                     userDto.Roles.Remove(role);
                 }
                 await dbContext.SaveChangesAsync(cancellationToken);
+
+                var removedIds = rolesToRemove.Select(r => r.Id).ToList();
+                var addedIds = rolesToAdd.Select(r => r.Id).ToList();
+                var userRolesUpdatedEvent = new UserRoleUpdatedEvent(userId, removedIds,addedIds, DateTime.UtcNow);
+                await mediator.Publish(userRolesUpdatedEvent, cancellationToken);
 
                 return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been updated");
             }
