@@ -1,6 +1,6 @@
 using BookStore.Core.Abstractions.Interfaces;
-using BookStore.Core.Abstractions.Models;
 using BookStore.Core.Abstractions.Models.ApiResponses;
+using BookStore.Core.Abstractions.Models.Roles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Web.Api.Controllers

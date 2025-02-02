@@ -1,6 +1,6 @@
 ﻿using BookStore.Core.Abstractions.Interfaces;
-using BookStore.Core.Abstractions.Models;
 using BookStore.Core.Abstractions.Models.ApiResponses;
+using BookStore.Core.Abstractions.Models.Categories;
 using BookStore.Core.Extensions;
 using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿using BookStore.Core.Abstractions.Models;
+﻿using BookStore.Core.Abstractions.Models.Categories;
 using BookStore.Infrastructure.DTOs;
 
 namespace BookStore.Core.Extensions

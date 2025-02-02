@@ -1,5 +1,5 @@
-﻿using BookStore.Core.Abstractions.Models;
-using BookStore.Core.Abstractions.Models.ApiResponses;
+﻿using BookStore.Core.Abstractions.Models.ApiResponses;
+using BookStore.Core.Abstractions.Models.Roles;
 
 namespace BookStore.Core.Abstractions.Interfaces
 {

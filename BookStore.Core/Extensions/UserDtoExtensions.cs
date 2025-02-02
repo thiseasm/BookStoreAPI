@@ -1,4 +1,5 @@
-﻿using BookStore.Core.Abstractions.Models;
+﻿using BookStore.Core.Abstractions.Models.Roles;
+using BookStore.Core.Abstractions.Models.Users;
 using BookStore.Infrastructure.DTOs;
 
 namespace BookStore.Core.Extensions

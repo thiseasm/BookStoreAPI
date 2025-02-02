@@ -1,4 +1,6 @@
-﻿namespace BookStore.Core.Abstractions.Models
+﻿using BookStore.Core.Abstractions.Models.Categories;
+
+namespace BookStore.Core.Abstractions.Models.Books
 {
     public class Book
     {

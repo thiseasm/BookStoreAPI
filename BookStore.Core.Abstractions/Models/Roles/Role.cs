@@ -1,4 +1,4 @@
-﻿namespace BookStore.Core.Abstractions.Models
+﻿namespace BookStore.Core.Abstractions.Models.Roles
 {
     public class Role
     {
