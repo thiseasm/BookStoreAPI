@@ -19,6 +19,18 @@ namespace BookStore.Web.Api.Controllers
             return Ok(result.Data);
         }
 
+        [HttpGet("{id:int:min(1)}")]
+        [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetUsersAsync(int id,CancellationToken cancellationToken)
+        {
+            var result = await userService.GetUserByIdAsync(id, cancellationToken);
+            return result.Success
+                ? Ok(result.Data)
+                : StatusCode(result.Code, result.Error);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<CreateUserResponse>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status400BadRequest)]

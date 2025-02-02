@@ -7,7 +7,8 @@ namespace BookStore.Core.Abstractions.Interfaces
     public interface IUserService
     {
         Task<ApiResponse<IList<User>>> GetUsersAsync(CancellationToken cancellationToken = default);
+        Task<ApiResponse<User>> GetUserByIdAsync(int userId, CancellationToken cancellationToken = default);
         Task<ApiResponse<CreateUserResponse>> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken = default);
-        Task<ApiResponse<string>> UpdateUserRolesAsync(int id, UpdateUserRolesRequest request, CancellationToken cancellationToken = default);
+        Task<ApiResponse<string>> UpdateUserRolesAsync(int userId, UpdateUserRolesRequest request, CancellationToken cancellationToken = default);
     }
 }

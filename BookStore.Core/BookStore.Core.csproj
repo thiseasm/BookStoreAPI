@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BookStore.Core.Abstractions\BookStore.Core.Abstractions.csproj" />
     <ProjectReference Include="..\BookStore.Data.Abstractions\BookStore.Infrastructure.csproj" />
   </ItemGroup>
