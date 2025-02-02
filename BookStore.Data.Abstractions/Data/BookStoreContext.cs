@@ -9,6 +9,7 @@ namespace BookStore.Infrastructure.Data
         public DbSet<RoleDto> Roles { get; set; }
         public DbSet<BookDto> Books { get; set; }
         public DbSet<CategoryDto> Categories { get; set; }
+        public DbSet<UserLogDto> UserLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,9 +31,9 @@ namespace BookStore.Infrastructure.Data
 
             modelBuilder.Entity<BookDto>()
                 .ToTable("Book")
-                .HasOne(e => e.Category)
+                .HasOne(b => b.Category)
                 .WithMany()
-                .HasForeignKey(e => e.CategoryId)
+                .HasForeignKey(b => b.CategoryId)
                 .IsRequired();
 
             modelBuilder.Entity<CategoryDto>()
@@ -50,6 +51,10 @@ namespace BookStore.Infrastructure.Data
 
             modelBuilder.Entity<UserRoleDto>()
                 .ToTable("UserRoles");
+
+            modelBuilder.Entity<UserLogDto>()
+                .ToTable("UserLogs")
+                .HasKey(l => new {l.Timestamp, l.EntityId });
 
             base.OnModelCreating(modelBuilder);
         }
