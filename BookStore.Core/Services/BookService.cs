@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace BookStore.Core.Implementations
+namespace BookStore.Core.Services
 {
     public class BookService(ILogger<BookService> logger, BookStoreContext dbContext) : IBookService
     {
@@ -63,7 +63,7 @@ namespace BookStore.Core.Implementations
                     return ApiResponse<int>.BadRequest($"Category with ID: {request.CategoryId} does not exist");
                 }
 
-                var bookDto = new BookDto { Name = request.Name, CategoryId = request.CategoryId};
+                var bookDto = new BookDto { Name = request.Name, CategoryId = request.CategoryId };
 
                 await dbContext.Books.AddAsync(bookDto, cancellationToken);
                 await dbContext.SaveChangesAsync(cancellationToken);

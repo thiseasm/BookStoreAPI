@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace BookStore.Core.Implementations
+namespace BookStore.Core.Services
 {
     public class UserService(ILogger<UserService> logger,BookStoreContext dbContext) : IUserService
     {

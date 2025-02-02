@@ -5,7 +5,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace BookStore.Core.Implementations
+namespace BookStore.Core.Services
 {
     public class RoleService(ILogger<RoleService> logger, BookStoreContext dbContext) : IRoleService
     {

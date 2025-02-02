@@ -6,7 +6,7 @@ using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace BookStore.Core.Implementations
+namespace BookStore.Core.Services
 {
     public class CategoryService(ILogger<CategoryService> logger, BookStoreContext dbContext) : ICategoryService
     {

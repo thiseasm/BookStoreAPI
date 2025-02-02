@@ -1,5 +1,5 @@
 ﻿using BookStore.Core.Abstractions.Interfaces;
-using BookStore.Core.Implementations;
+using BookStore.Core.Services;
 
 namespace BookStore.Web.Api.Extensions
 {
