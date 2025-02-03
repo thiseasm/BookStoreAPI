@@ -1,4 +1,5 @@
-﻿using BookStore.Core.Abstractions.Events;
+﻿using Azure.Core;
+using BookStore.Core.Abstractions.Events;
 using BookStore.Core.Abstractions.Interfaces.Services;
 using BookStore.Core.Abstractions.Models.ApiResponses;
 using BookStore.Core.Abstractions.Models.Users;
@@ -99,7 +100,7 @@ namespace BookStore.Core.Services
 
                 if (request.RoleIds.Count == 0)
                 {
-                    return await ClearUserRoles(userDto, cancellationToken);
+                    return await ClearUserRolesAsync(userDto, cancellationToken);
                 }
 
                 var roleDtos = await dbContext.Roles
@@ -113,31 +114,8 @@ namespace BookStore.Core.Services
                     return ApiResponse<string>.NotFound($"Roles with IDs: {string.Join(", ", rolesNotFound)} not found");
                 }
 
-                var existingRoleIds = userDto.Roles.Select(r => r.Id).ToHashSet();
-                var newRoleIds = request.RoleIds.ToHashSet();
+                return await UpdateUserRolesAsync(userDto, roleDtos, cancellationToken);
 
-                if (existingRoleIds.SetEquals(newRoleIds))
-                {
-                    return ApiResponse<string>.Ok($"Roles for User with ID: {userId} are already up to date");
-                }
-
-                var rolesToAdd = roleDtos.Where(r => !existingRoleIds.Contains(r.Id));
-                foreach (var role in rolesToAdd)
-                {
-                    userDto.Roles.Add(role);
-                }
-
-                var rolesToRemove = userDto.Roles.Where(r => !newRoleIds.Contains(r.Id)).ToList();
-                foreach (var role in rolesToRemove)
-                {
-                    userDto.Roles.Remove(role);
-                }
-                await dbContext.SaveChangesAsync(cancellationToken);
-
-                var userRolesUpdatedEvent = new UserRolesUpdatedEvent(userId, existingRoleIds, newRoleIds, DateTime.UtcNow);
-                await mediator.Send(userRolesUpdatedEvent, cancellationToken);
-
-                return ApiResponse<string>.Ok($"Roles for User with ID: {userId} have been updated");
             }
             catch (Exception ex)
             {
@@ -146,8 +124,13 @@ namespace BookStore.Core.Services
             }
         }
 
-        private async Task<ApiResponse<string>> ClearUserRoles(UserDto userDto, CancellationToken cancellationToken)
+        private async Task<ApiResponse<string>> ClearUserRolesAsync(UserDto userDto, CancellationToken cancellationToken)
         {
+            if(userDto.Roles.Count == 0)
+            {
+                return ApiResponse<string>.Ok($"Roles for User with ID: {userDto.Id} are already up to date");
+            }
+
             var rolesToClear = userDto.Roles.Select(r => r.Id).ToHashSet();
             userDto.Roles.Clear();
             await dbContext.SaveChangesAsync(cancellationToken);
@@ -155,6 +138,26 @@ namespace BookStore.Core.Services
             var rolesUpdatedEvent = new UserRolesUpdatedEvent(userDto.Id, rolesToClear, [], DateTime.UtcNow);
             await mediator.Send(rolesUpdatedEvent, cancellationToken);
             return ApiResponse<string>.Ok($"Roles for User with ID: {userDto.Id} have been cleared");
+        }
+
+        private async Task<ApiResponse<string>> UpdateUserRolesAsync(UserDto userDto, List<RoleDto> rolesToAdd, CancellationToken cancellationToken)
+        {
+            var existingRoleIds = userDto.Roles.Select(r => r.Id).ToHashSet();
+            var newRoleIds = rolesToAdd.Select(r => r.Id).ToHashSet();
+
+            if (existingRoleIds.SetEquals(newRoleIds))
+            {
+                return ApiResponse<string>.Ok($"Roles for User with ID: {userDto.Id} are already up to date");
+            }
+
+            userDto.Roles.Clear();
+            userDto.Roles.AddRange(rolesToAdd);
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            var userRolesUpdatedEvent = new UserRolesUpdatedEvent(userDto.Id, existingRoleIds, newRoleIds, DateTime.UtcNow);
+            await mediator.Send(userRolesUpdatedEvent, cancellationToken);
+
+            return ApiResponse<string>.Ok($"Roles for User with ID: {userDto.Id} have been updated");
         }
     }
 }

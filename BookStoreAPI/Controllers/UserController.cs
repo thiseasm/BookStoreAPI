@@ -42,7 +42,7 @@ namespace BookStore.Web.Api.Controllers
                 : StatusCode(result.Code, result.Error);
         }
 
-        [HttpPost("{id:int:min(1)}/role")]
+        [HttpPost("{id:int:min(1)}/roles")]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status500InternalServerError)]
