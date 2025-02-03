@@ -102,7 +102,7 @@ http://localhost:8080/swagger
 
 ## :memo: Logging & Cleanup
 - **Audit Logs:** Stored in `UserLogs` table
-- **Cleanup Job:** Deletes logs older than 20 days (or otherwise configured in appsettings.json), runs as a background service
+- **Cleanup Job:** Deletes logs older than 20 days (or otherwise configured in `appsettings.json`), runs as a background service
 
 ## :flashlight: Troubleshooting
 
